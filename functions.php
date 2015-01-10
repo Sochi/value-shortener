@@ -1,44 +1,46 @@
 <?php
 
-function decode($pattern, $str) {
-    $length = strlen($str) - 1;
+function decode($pattern, $string) {
+    $length = strlen($string) - 1;
     $count = strlen($pattern);
-    $num = 0;
-    for($i=$length;$i>=0;$i--) {
-        if(($pos = strpos($pattern,$str[$i])) !== false) {
-            $num = $num + $pos * pow($count,$length-$i);
+    $number = 0;
+    
+    for ($i = $length; $i >= 0; --$i) {
+        if (($position = strpos($pattern, $string[$i])) !== false) {
+            $number += $position * pow($count, $length - $i);
         }
         else {
-            return 0;
+            return 0; // Invalid character
         }
     }
     
-    return $num;
+    return $number;
 }
 
-function encode($pattern, $num) {
+function encode($pattern, $number) {
     $count = strlen($pattern);
-    $h = largestFactor($count,($res = $num));
-    $product = '';
+    $length = largestFactor($count, $result = $number);
+    $product = null; // Empty definition
     
-    for($i=$h;$i>=0;$i--) {
-        $pow = pow($count,$i);
-        $div = floor($res/$pow);
-        $res = $res - $pow * $div;
-        $product .= $pattern[$div];
+    for ($i = $length; $i >= 0; --$i) {
+        $power = pow($count, $i);
+        $index = floor($result / $power);
+        $result -= $power * $index;
+        $product .= $pattern[intval($index)];
     }
     
     return $product;
 }
 
-function largestFactor($of, $num) {
-    $iter = 1;
-    $new = $of;
-    while($new < $num) {
-        $new = $new * $of;
-        $iter++;
+function largestFactor($of, $number) {
+    $iteration = 1;
+    $compare = $of;
+    while ($compare < $number) {
+        $compare *= $of;
+        ++$iteration;
     }
-    return $iter-1;
+    
+    return $iteration - 1;
 }
 
 

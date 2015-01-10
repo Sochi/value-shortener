@@ -1,6 +1,6 @@
 <?php
 
-require sprintf('%s/functions.php', __DIR__));
+require sprintf('%s/functions.php', __DIR__);
 
 
 $chars = '0123456789abcdefghijklmnopqrstuvwxyz'; //ABSDEFGHIJKLMNOPQRSTUVWXYZ
