@@ -43,5 +43,30 @@ function largestFactor($of, $number) {
     return $iteration - 1;
 }
 
+function hasDuplicates($pattern) {
+    $characterCount = strlen($pattern);
+    
+    for ($i = 0; $i < $characterCount; ++$i) {
+        if (strpos($pattern, $pattern[$i]) !== $i) {
+            return true; // Already iterated
+        }
+    }
+    
+    return false;
+}
 
+function hasDuplicatesSimple($pattern) {
+    $characterCount = strlen($pattern);
+    $characterSet = array();
+    
+    for ($i = 0; $i < $characterCount; ++$i) {
+        if(isset($characterSet[$pattern[$i]])){
+            return true;
+        }
+        
+        $characterSet[$pattern[$i]] = true; // Present character
+    }
+    
+    return false;
+}
 

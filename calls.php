@@ -15,8 +15,24 @@ for ($i = 0; $i < 16; ++$i) {
     $examples[$randomNumber] = encode(CHARACTERS_CASE_SENSITIVE, $randomNumber);
 }
 
+// 
+$exampleSets = array(
+    CHARACTERS_CASE_INSENSITIVE, 
+    CHARACTERS_CASE_SENSITIVE,
+    '0123456789abcdefghijklmnopqrstuvwxyzabc',
+    '0123456789abcde12345fghijkl',
+);
+
 ?>
 <pre>
+<?php foreach ($exampleSets as $characters): ?>
+<?php if (hasDuplicates($characters)): ?>
+Unsuitable character set: <?=$characters; ?> (containing duplicate characters)
+<?php else: ?>
+Suitable character set: <?=$characters; ?> 
+<?php endif; ?>
+<?php endforeach; ?>
+-----
 <?php foreach ($examples as $number => $encoded): ?>
 Randomly-generated: <?=$number; ?> 
 Shortened output: <?=$encoded; ?> 
