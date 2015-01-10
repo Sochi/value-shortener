@@ -1,15 +1,26 @@
 <?php
 
+define('CHARACTERS_CASE_INSENSITIVE', '0123456789abcdefghijklmnopqrstuvwxyz');
+define('CHARACTERS_CASE_SENSITIVE', CHARACTERS_CASE_INSENSITIVE . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+
+// Necessary definitions
 require sprintf('%s/functions.php', __DIR__);
 
+// Array-example
+$examples = array();
 
-$chars = '0123456789abcdefghijklmnopqrstuvwxyz'; //ABSDEFGHIJKLMNOPQRSTUVWXYZ
-#echo decode($chars,'3zacdqw');
-#echo encode($chars,728044);
+// Generate examples 
+for ($i = 0; $i < 16; ++$i) {
+    $randomNumber = mt_rand();
+    $examples[$randomNumber] = encode(CHARACTERS_CASE_SENSITIVE, $randomNumber);
+}
 
-$orig = 1947032468; //48188687893121111111111111111111111194703246848188687893121111111111111111111111194703246848188687893121111111111111111111111; //19470324
-$var = encode($chars,$orig);
-$num = decode($chars,$var);
-
-echo $orig.' = '.$var.' = '.$num;
-
+?>
+<pre>
+<?php foreach ($examples as $number => $encoded): ?>
+Randomly-generated: <?=$number; ?> 
+Shortened output: <?=$encoded; ?> 
+Reverse check: <?=decode(CHARACTERS_CASE_SENSITIVE, $encoded); ?> 
+--
+<?php endforeach; ?>
+</pre>
